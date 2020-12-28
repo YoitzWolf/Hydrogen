@@ -17,6 +17,7 @@
     <string name="hub_info_words">Hub info:</string>
     <string name="game_info">Game info:</string>
     <string name="leave_hub_words">Leave Hub</string>
+    <string name="editcode_bar_send">send</string>
 
     <string-array name="test_values">
         <item>text 1</item>

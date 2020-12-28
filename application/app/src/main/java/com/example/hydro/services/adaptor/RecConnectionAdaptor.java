@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hydro.R;
+import com.example.hydro.explorer.Explorer;
 import com.example.hydro.request.models.Connection;
 import com.example.hydro.request.models.Hub;
 
@@ -98,6 +99,7 @@ public class RecConnectionAdaptor extends RecyclerView.Adapter<RecConnectionAdap
             selectBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Explorer.memory.connection = connection;
                     open.sendEmptyMessage(connection.id);
                 }
             });

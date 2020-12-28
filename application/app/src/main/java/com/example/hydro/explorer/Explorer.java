@@ -30,6 +30,7 @@ public class Explorer {
         private USER User;
 
         public int selectedConnectionId;
+        public Connection connection;
 
         public List<Hub> hubs_list = new ArrayList<Hub>();
         public List<Game> games_list = new ArrayList<Game>();

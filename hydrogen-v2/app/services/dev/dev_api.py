@@ -14,6 +14,7 @@ from app.manager	   import JSLoader
 
 from app.sql import session as Session
 from app.sql.models import *
+from app.sql.models.task import Task
 from app.sql.models.token import TokenTypes
 
 # -
@@ -47,6 +48,28 @@ def save_solution():
 	return (ERRTOKEN, MS.INVALID_TASK)
 
 
+@blueprint.route("/api/dev/task")
+def get_task():
+
+	query = flask.request.args
+
+	if query.get("id"): 
+		session = Session.create_session()
+		game = session.query(Game).filter(Game.id==query["id"]).first()
+
+		task = Task(session, Config, game)
+		task.load()
+
+		session.close()
+
+		return 	make_response(
+				{
+					"body": task.get_json()
+				}
+			) 
+	
+	else: return "None"
+
 
 @blueprint.route("/api/dev/all")
 def get_all():
@@ -59,6 +82,7 @@ def get_all():
 					"body": list([ i.get_json() for i in list(notes)])
 				}
 			)
+
 '''
 
 @blueprint.route("/api/hubs/connections")

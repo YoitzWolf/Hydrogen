@@ -1,16 +1,26 @@
 package com.example.hydro.acts;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hydro.R;
+import com.example.hydro.explorer.Explorer;
+import com.example.hydro.request.RequestRetrofitMaster;
 import com.example.hydro.views.EditCode;
 
 public class ActEdit extends AppCompatActivity {
+
+    RequestRetrofitMaster master = null;
+    Explorer explorer = null;
 
     private EditCode editCode;
     private Button codeBtn;
@@ -18,25 +28,41 @@ public class ActEdit extends AppCompatActivity {
     private Button toolBtn;
     private HorizontalScrollView toolBar;
 
+    public LinearLayout taskTab;
+    public WebView taskView;
+
     public void closeAll() {
         codeBtn.setSelected(false);
         taskBtn.setSelected(false);
         //toolBtn.setSelected(false);
 
         this.editCode.setVisibility(View.GONE);
+        this.taskTab.setVisibility(View.GONE);
     }
 
     public void openEditor() {
+        closeAll();
         this.editCode.setVisibility(View.VISIBLE);
         this.codeBtn.setSelected(true);
+
+    }
+
+    public void openTask() {
+        closeAll();
+        closeBar();
+        taskBtn.setSelected(true);
+        this.taskTab.setVisibility(View.VISIBLE);
+    }
+
+    public void closeBar(){
+        this.toolBar.setVisibility(View.GONE);
+        this.toolBtn.setSelected(false);
     }
 
     private void initOnClicks() {
         this.codeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                closeAll();
-                v.setSelected(true);
                 openEditor();
             }
         });
@@ -45,7 +71,7 @@ public class ActEdit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 closeAll();
-                v.setSelected(true);
+                openTask();
             }
         });
 
@@ -75,6 +101,18 @@ public class ActEdit extends AppCompatActivity {
         this.editCode = this.findViewById(R.id.code_editor);
         this.toolBar = this.findViewById(R.id.bar_tools_bar);
 
+        this.taskTab = this.findViewById(R.id.task);
+        this.taskView = this.findViewById(R.id.task_view);
+
+    }
+
+    public void loadTask(){
+        this.master.getTask(new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                taskView.loadData(Explorer.memory.currentTask.taskHtml, "text/html; charset=utf-8", "UTF-8");
+            }
+        });
     }
 
     @Override
@@ -83,7 +121,13 @@ public class ActEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editor);
 
+        master = RequestRetrofitMaster.getInstance(this);
+        explorer = new Explorer(this);
+
+        loadTask();
+
         this.initIds();
         this.initOnClicks();
+        this.openTask();
     }
 }

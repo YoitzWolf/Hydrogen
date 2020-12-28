@@ -20,6 +20,7 @@ import com.example.hydro.request.models.LOGINBODY;
 import com.example.hydro.request.models.REGISTERBODY;
 import com.example.hydro.request.models.SIMPLEREQUEST;
 import com.example.hydro.request.models.TOKENBODY;
+import com.example.hydro.request.models.Task;
 import com.example.hydro.request.models.Token;
 import com.example.hydro.request.models.TokenTypes;
 import com.example.hydro.request.models.USER;
@@ -278,6 +279,27 @@ public class RequestRetrofitMaster {
             public void onFailure(Call<SIMPLEREQUEST<List<Connection>>> call, Throwable t) {
                 super.onFailure(call, t);
                 Log.i("REQ_CON", "ERROR");
+                Toast toast;
+                toast = Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG);
+                toast.show();
+            }
+        });
+    }
+
+    public void getTask(Handler handler) {
+        Call<SIMPLEREQUEST<Task>> call = service.getTask(Explorer.memory.connection.hub.game.id);
+        call.enqueue(new GenericCallback<SIMPLEREQUEST<Task>>() {
+            @Override
+            public void ifSuccess(SIMPLEREQUEST<Task> result) {
+                Log.i("REQ_TASK", result.getBody().toString());
+                Explorer.memory.currentTask = result.getBody();
+                handler.sendEmptyMessage(1);
+            }
+
+            @Override
+            public void onFailure(Call<SIMPLEREQUEST<Task>> call, Throwable t) {
+                super.onFailure(call, t);
+                Log.i("REQ_TASK", "ERROR");
                 Toast toast;
                 toast = Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG);
                 toast.show();

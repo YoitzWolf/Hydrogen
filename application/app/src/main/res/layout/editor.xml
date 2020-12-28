@@ -95,6 +95,22 @@
             android:textStyle="bold">
 
         </com.example.hydro.views.EditCode>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/task"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <WebView
+                    android:id="@+id/task_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </ScrollView>
+        </LinearLayout>
         <!-- endblock -->
     </LinearLayout>
 </FrameLayout>

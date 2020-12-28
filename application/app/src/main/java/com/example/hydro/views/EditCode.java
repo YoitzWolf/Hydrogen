@@ -2,16 +2,29 @@ package com.example.hydro.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Patterns;
 
 import com.example.hydro.R;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.lang.Math.min;
 
 public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
+
+
+    private Pattern KEYWORDS = Pattern.compile("\\b(def|self||if|else|break|continue|try|catch|while|for|return|print|class|=)\\b");
+
 
     //---------------------
     final float scale = getContext().getResources().getDisplayMetrics().density;
@@ -33,6 +46,7 @@ public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
     private Paint gTextPaint; // number lines
     private Paint gDividerPaint; // divider line
     private Paint gBlockPaint; // block rect paint
+    private TextWatcher watcher;
 
     //--------------------
 
@@ -53,10 +67,64 @@ public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
         this.gBlockPaint.setColor(getContext().getResources().getColor(R.color.darkGray));
     }
 
+    public void processText(String newText){
+        removeTextChangedListener(watcher);
+        /* code here */
+        // TODO
+        this.setText(newText);
+        addTextChangedListener(watcher);
+    }
+
+    /* HIGHTLIGHTING*/
+
+    private void syntaxHighlight(){
+        Editable text = this.getText();
+
+        Matcher matcher = KEYWORDS.matcher(text);
+        matcher.region(0, this.getText().length());
+        while (matcher.find()){
+            text.setSpan(
+                    new ForegroundColorSpan(Color.parseColor("#7F0055")),
+                    matcher.start(),
+                    matcher.end(),
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+        }
+        Log.i("HL", "SHIT");
+    }
+
+    private void  cancelSyntaxHighlighting() {
+        //styler.endTASk()
+    }
+
+    private void  updateSyntaxHighlighting() {
+        syntaxHighlight();
+    }
+
     public void complex() {
+
+        watcher = new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                syntaxHighlight();
+            }
+        };
+
         this.gMargin = (int) (gMarginDP * scale + 0.5f);
         this.setHorizontallyScrolling(true);
         updatePaints();
+
     }
 
     @Override
@@ -115,9 +183,12 @@ public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
     }
 
 
+
+
     @Override
     protected void onDraw(Canvas canvas) {
         this.updateGutter();
+        this.updateSyntaxHighlighting();
         super.onDraw(canvas);
 
         int firstVisibleLine = getTopLine();
@@ -147,6 +218,7 @@ public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
                 (this.getScrollY() + this.getHeight()) + 0f,
                 gDividerPaint
         );
-
     }
+
+
 }

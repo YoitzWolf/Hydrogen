@@ -54,8 +54,8 @@ public interface NETWORK {
     @GET("/api/hubs/get_by_id")
     Call<SIMPLEREQUEST<List<Connection>>> getCurrentHub(@Query("id") String id, @Query("token") String token);
 
-    @GET("/api/hubs/get_task")
-    Call<SIMPLEREQUEST<List<Task>>> getTask(@Query("id") String id, @Query("token") String token);
+    @GET("/api/dev/task")
+    Call<SIMPLEREQUEST<Task>> getTask(@Query("id") int id);
 
     @GET("/api/games/all")
     Call<SIMPLEREQUEST<List<Game>>> getAllGames();
