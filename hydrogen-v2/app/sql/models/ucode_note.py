@@ -32,6 +32,9 @@ class UcNote(SqlAlchemyBase):
 	)
 	connection = orm.relation("Connection", lazy='subquery')
 
+	def save_me(config):
+		pass
+
 	def __repr__(self): return f"<Connection> {self.id} {self.owner.login} {self.hub.name}"
 
 	def to_dict(self):

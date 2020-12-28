@@ -26,18 +26,22 @@ public class ActEdit extends AppCompatActivity {
     private Button codeBtn;
     private Button taskBtn;
     private Button toolBtn;
+    private Button sendBtn;
     private HorizontalScrollView toolBar;
 
     public LinearLayout taskTab;
     public WebView taskView;
 
+    public LinearLayout sendTab;
+
     public void closeAll() {
         codeBtn.setSelected(false);
         taskBtn.setSelected(false);
-        //toolBtn.setSelected(false);
+        sendBtn.setSelected(false);
 
         this.editCode.setVisibility(View.GONE);
         this.taskTab.setVisibility(View.GONE);
+        this.sendTab.setVisibility(View.GONE);
     }
 
     public void openEditor() {
@@ -52,6 +56,13 @@ public class ActEdit extends AppCompatActivity {
         closeBar();
         taskBtn.setSelected(true);
         this.taskTab.setVisibility(View.VISIBLE);
+    }
+
+    public void openSend() {
+        closeAll();
+        closeBar();
+        this.sendBtn.setSelected(true);
+        this.sendTab.setVisibility(View.VISIBLE);
     }
 
     public void closeBar(){
@@ -70,7 +81,6 @@ public class ActEdit extends AppCompatActivity {
         this.taskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                closeAll();
                 openTask();
             }
         });
@@ -78,6 +88,7 @@ public class ActEdit extends AppCompatActivity {
         this.toolBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!codeBtn.isSelected()) return;
                 if (v.isSelected()) {
                     // CLOSE
                     toolBar.setVisibility(View.GONE);
@@ -89,6 +100,13 @@ public class ActEdit extends AppCompatActivity {
                 }
             }
         });
+
+        this.sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSend();
+            }
+        });
     }
 
     private void initIds() {
@@ -96,6 +114,7 @@ public class ActEdit extends AppCompatActivity {
         this.codeBtn = this.findViewById(R.id.bar_code_btn);
         this.taskBtn = this.findViewById(R.id.bar_task_btn);
         this.toolBtn = this.findViewById(R.id.bar_tools_btn);
+        this.sendBtn = this.findViewById(R.id.bar_send_btn);
 
         // Views
         this.editCode = this.findViewById(R.id.code_editor);
@@ -104,13 +123,17 @@ public class ActEdit extends AppCompatActivity {
         this.taskTab = this.findViewById(R.id.task);
         this.taskView = this.findViewById(R.id.task_view);
 
+        this.sendTab = this.findViewById(R.id.send);
+
     }
 
     public void loadTask(){
         this.master.getTask(new Handler(){
             @Override
             public void handleMessage(@NonNull Message msg) {
-                taskView.loadData(Explorer.memory.currentTask.taskHtml, "text/html; charset=utf-8", "UTF-8");
+                taskView.loadData(
+                        Explorer.memory.currentTask.taskHtml,
+                        "text/html; charset=utf-8", "UTF-8");
             }
         });
     }

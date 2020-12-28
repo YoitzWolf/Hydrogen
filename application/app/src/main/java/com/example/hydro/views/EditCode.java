@@ -23,7 +23,7 @@ import static java.lang.Math.min;
 public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
 
 
-    private Pattern KEYWORDS = Pattern.compile("\\b(def|self||if|else|break|continue|try|catch|while|for|return|print|class|=)\\b");
+    private Pattern KEYWORDS = Pattern.compile("\\b(def|self|elif|if|else|break|continue|try|catch|while|for|return|print|class|=)\\b");
 
 
     //---------------------
@@ -120,7 +120,7 @@ public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
                 syntaxHighlight();
             }
         };
-
+        addTextChangedListener(watcher);
         this.gMargin = (int) (gMarginDP * scale + 0.5f);
         this.setHorizontallyScrolling(true);
         updatePaints();

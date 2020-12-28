@@ -18,6 +18,7 @@
     <string name="game_info">Game info:</string>
     <string name="leave_hub_words">Leave Hub</string>
     <string name="editcode_bar_send">send</string>
+    <string name="write_code_message">Write code and send it !</string>
 
     <string-array name="test_values">
         <item>text 1</item>

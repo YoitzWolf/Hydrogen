@@ -112,5 +112,64 @@
             </ScrollView>
         </LinearLayout>
         <!-- endblock -->
+
+        <LinearLayout
+            android:id="@+id/send"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/smoothLight"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textSize="9pt"
+                        android:text="@string/write_code_message"
+                        />
+
+                    <CheckBox
+                        android:layout_gravity="center"
+                        android:id="@+id/is_public_checkbox"
+                        android:button="@drawable/checkbox_selector"
+                        android:paddingLeft="20dp"
+                        style="@style/TextView"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/is_public_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <Button
+                        android:clickable="false"
+                        android:layout_gravity="center"
+                        android:text="@string/editcode_bar_send"
+                        android:background="@color/darkGray"
+                        style="@style/TypicalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </ScrollView>
+        </LinearLayout>
+        <!-- endblock -->
+
     </LinearLayout>
 </FrameLayout>

@@ -2,6 +2,10 @@
 Hydrogen App. Server&amp;Client.
 
 
+презентация и пояснительная записка:
+***./documents***
+
+
 сервер: 
 ***./hydroge-v2/main.py***
 
