@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import com.example.hydro.R;
 import com.example.hydro.acts.ActEdit;
 import com.example.hydro.explorer.Explorer;
 import com.example.hydro.request.callbacks.GenericCallback;
+import com.example.hydro.request.models.CONNBODY;
 import com.example.hydro.request.models.Connection;
 import com.example.hydro.request.models.Game;
 import com.example.hydro.request.models.HUBBODY;
@@ -97,7 +99,7 @@ public class RequestRetrofitMaster {
                     public void ifSuccess(SIMPLEREQUEST<TOKENBODY> result) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
                         // change CHANNEL authToken field
                         Toast toast;
-                        toast = Toast.makeText(context, result.getBody().message, Toast.LENGTH_LONG);
+                        toast = Toast.makeText(context, result.getBody().getMessage(), Toast.LENGTH_LONG);
                         Explorer explorer = new Explorer(context);
                         try {
                             explorer.savePreference(result.getBody().getToken());
@@ -157,13 +159,38 @@ public class RequestRetrofitMaster {
         });
     }
 
+    public void login_to_hub(Handler ok, CONNBODY body) {
+        Call<SIMPLEREQUEST<TOKENBODY>> call = service.login_to_hub(body);
+        call.enqueue(new GenericCallback<SIMPLEREQUEST<TOKENBODY>>() {
+            @Override
+            public void ifSuccess(SIMPLEREQUEST<TOKENBODY> result) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+                Toast toast;
+                toast = Toast.makeText(context, "Ok", Toast.LENGTH_LONG);
+                toast.show();
+                Log.i("REQ_LOG", result.getBody().token);
+
+               ok.sendEmptyMessage(1);
+            }
+
+            @Override
+            public void onFailure(Call<SIMPLEREQUEST<TOKENBODY>> call, Throwable t) {
+                super.onFailure(call, t);
+                Toast toast;
+                toast = Toast.makeText(context, "Wrong", Toast.LENGTH_LONG);
+                toast.show();
+                ok.sendEmptyMessage(0);
+            }
+        });
+    }
+
 
     public void getAuthToken(Handler ok, Handler err) {
 
         Explorer explorer = new Explorer(context);
         TOKENBODY body = null;
         try {
-            body = new TOKENBODY(explorer.loadPreference(Token.class, TokenTypes.Refr.name()).getPreference());
+            Pair<String, String> pair = explorer.loadPreference(Token.class, TokenTypes.Refr.name()).getPreference();
+            body = new TOKENBODY(pair);
         } catch (Exception e) {
             e.printStackTrace();
             err.sendEmptyMessage(0);

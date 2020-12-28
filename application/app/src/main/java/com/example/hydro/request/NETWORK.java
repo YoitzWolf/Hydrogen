@@ -1,5 +1,6 @@
 package com.example.hydro.request;
 
+import com.example.hydro.request.models.CONNBODY;
 import com.example.hydro.request.models.Connection;
 import com.example.hydro.request.models.Game;
 import com.example.hydro.request.models.HUBBODY;
@@ -50,6 +51,9 @@ public interface NETWORK {
 
     @GET("/api/hubs/connections")
     Call<SIMPLEREQUEST<List<Connection>>> getConnections(@Query("token") String token);
+
+    @POST("/api/hubs/login")
+    Call<SIMPLEREQUEST<TOKENBODY>> login_to_hub(@Body CONNBODY body);
 
     @GET("/api/hubs/get_by_id")
     Call<SIMPLEREQUEST<List<Connection>>> getCurrentHub(@Query("id") String id, @Query("token") String token);

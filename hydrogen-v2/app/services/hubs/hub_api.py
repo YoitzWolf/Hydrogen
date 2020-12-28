@@ -94,44 +94,34 @@ def create_hub():
 
 # sign into hub
 
-@blueprint.route("/api/hubs/login", methods=["GET", 'POST'])
+@blueprint.route("/api/hubs/login", methods=['POST'])
 @make_token_response
 def sign_into():
 	data = flask.request.get_json()
 	if data:
 		session = Session.create_session()
 
-		lst = session.query(Token).filter(Token.token==data['token'], Token.token_type=="auth")
+		lst = session.query(Token).filter(Token.token==data['token'], Token.token_type==Token.Types.Auth.name)
 		if len(lst.all()) == 0: 		 return (ERRTOKEN, MS.AUTH_Err)
 		elif not lst.first().is_valid(): return (ERRTOKEN, MS.INVALID_TOKEN)
 
 		user = lst.first().owner
 
-		lst = session.query(Hub).filter(Hub.name==data['name'])
+		lst = session.query(Hub).filter(Hub.id==data['hub_id'])
 
 		if len(lst.all()) == 0: return (ERRTOKEN, MS.UNKNOWN_VALUE)
 
 		hub = lst.first()
-		if session.query(Connection).filter(Connection.hub_id==hub_id, Connection.owner_id==user.id) : return (ERRTOKEN, "already connected!")
+		if len(session.query(Connection).filter(Connection.hub_id==hub.id, Connection.owner_id==user.id).all()) > 0 : return (ERRTOKEN, "already connected!")
 		elif not hub.check_password(data["password"]): return (ERRTOKEN, MS.WRONG_PASSW)
-		elif len(hub.connections.all()) >= hub.users_limit: return (ERRTOKEN, MS.HUB_LIMIT)
+		elif len(hub.connections) >= hub.users_limit: return (ERRTOKEN, MS.HUB_LIMIT)
 		else:
 
 			connection = Connection(
 					owner_id=user.id,
 					hub_id=hub.id
 				)
-			'''
-			hub = Hub(
-					name=data['hub_name'],
-					owner_id=lst.first().owner.id,
-					description=data['description'],
-					public=data['public'],
-					game_id=data['game_id']
-				)
-			hub.set_password(data['password'])
-			'''
-			session.add(commit)
+			session.add(connection)
 			session.commit()
 			session.close()
 
@@ -196,6 +186,23 @@ def get_connections_by_token():
 					"body": list([ i.get_json() for i in list(connections)])
 				}
 			)
+
+
+@blueprint.route("/api/hubs/connections/all")
+def get_connections():
+
+	session = Session.create_session()
+
+	connections = session.query(Connection).all()
+
+	session.close()
+
+	return make_response(
+				{
+					"body": list([ i.get_json() for i in list(connections)])
+				}
+			)
+
 
 
 @blueprint.route("/api/hubs/filter")

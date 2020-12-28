@@ -14,7 +14,9 @@ import com.example.hydro.request.models.TokenTypes;
 import com.example.hydro.request.models.USER;
 
 import java.lang.reflect.InvocationTargetException;
+import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -32,9 +34,12 @@ public class Explorer {
         public int selectedConnectionId;
         public Connection connection;
 
+        public boolean notoken;
+
         public List<Hub> hubs_list = new ArrayList<Hub>();
         public List<Game> games_list = new ArrayList<Game>();
         public List<Connection> conn_list = new ArrayList<Connection>();
+        public HashMap<String, String> buffer = new HashMap<String, String>();
 
         public Task currentTask; // Game Task <Connection, Str WebView >
 
@@ -48,9 +53,15 @@ public class Explorer {
         public void clear() {
             this.AuthToken = null;
             this.User = null;
+            this.connection = null;
+            this.hubs_list.clear();
+            this.games_list.clear();
+            this.conn_list.clear();
+            this.buffer.clear();
         }
 
         private static Memory instance = new Memory();
+
 
         public static Memory getInstance() {
             return instance;
@@ -117,7 +128,7 @@ public class Explorer {
     }
 
     public void savePreference(Preferenceable prefs) {
-        this.setStorage(prefs.getStorage());
+        this.setStorage("tokens");
         SharedPreferences.Editor editor = this.storage.edit();
 
         Pair<String, String> pref = prefs.getPreference();
@@ -127,7 +138,7 @@ public class Explorer {
     }
 
     public Preferenceable loadPreference(Class<? extends Preferenceable> C, String key) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        this.setStorage(C.newInstance().getStorage());
+        this.setStorage("tokens");
         String value = this.storage.getString(key, "");
         Preferenceable pref = C.getConstructor(new Class[]{String.class, String.class}).newInstance(key, value);
         return pref;

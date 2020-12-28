@@ -72,6 +72,7 @@ class Hub(SqlAlchemyBase):
 
 	def get_json(self):
 		from app.sql import session as Session
+		from .connection import Connection
 		return {
 			"id": self.id,
 			"name": self.name,
@@ -80,7 +81,7 @@ class Hub(SqlAlchemyBase):
 			"game": self.game.get_json(),
 			"is_public": self.public,
 			"max_players": self.users_limit,
-			"players": len(Session.create_session().query(Hub).filter(Hub.id==self.id).all()	)
+			"players": len(Session.create_session().query(Connection).filter(Hub.id==self.id).all()	)
 		}
 
 	def to_json(self): return self.get_json()

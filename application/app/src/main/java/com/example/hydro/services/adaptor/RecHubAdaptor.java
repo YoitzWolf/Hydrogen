@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hydro.R;
+import com.example.hydro.explorer.Explorer;
 import com.example.hydro.request.models.Hub;
 
 import java.util.List;
@@ -99,6 +100,7 @@ public class RecHubAdaptor extends RecyclerView.Adapter<RecHubAdaptor.Holder> {
                 @Override
                 public void onClick(View v) {
                     if(hub.is_public || hub_password.getTextSize() != 0) {
+                        Explorer.memory.buffer.put("hub_password", hub_password.getText().toString());
                         onclick.sendEmptyMessage(hub.id);
                     }
                 }

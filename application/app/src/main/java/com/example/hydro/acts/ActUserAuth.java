@@ -42,7 +42,8 @@ public class ActUserAuth extends AppCompatActivity {
     public final Handler AUTH_ERROR = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
-
+            closeAll();
+            selectLogin();
         }
     };
 
@@ -173,13 +174,14 @@ public class ActUserAuth extends AppCompatActivity {
             @Override
             public void run() {
                 super.run();
-                while (Explorer.memory.getAuthToken() == null) {
+                while (Explorer.memory.getAuthToken().equals(null)) {
                     try {
                         sleep(50);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+
                 closeMe();
             }
         };
@@ -187,24 +189,26 @@ public class ActUserAuth extends AppCompatActivity {
     }
 
     private void closeMe() {
+        Explorer.memory.notoken = true;
         this.finish();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.login);
 
         Explorer.memory.clear();
-
         this.master = RequestRetrofitMaster.getInstance(this);
-
+        /*
         try {
             master.getAuthToken(AUTH_OK, AUTH_ERROR);
             //auth is OK
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        setContentView(R.layout.login);
+        }*/
+
+
 
         this.initIds();
         this.initOnClicks();
@@ -213,6 +217,6 @@ public class ActUserAuth extends AppCompatActivity {
 
         Log.i("act", "OPENED");
 
-        this.closeWhenAuthoriseable();
+        //this.closeWhenAuthoriseable();
     }
 }

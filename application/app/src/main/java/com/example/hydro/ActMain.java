@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hydro.explorer.Explorer;
 import com.example.hydro.request.RequestRetrofitMaster;
+import com.example.hydro.request.models.CONNBODY;
+import com.example.hydro.request.models.LOGINBODY;
 import com.example.hydro.services.adaptor.RecConnectionAdaptor;
 import com.example.hydro.services.adaptor.RecGameAdaptor;
 import com.example.hydro.services.adaptor.RecHubAdaptor;
@@ -29,9 +31,15 @@ public class ActMain extends AppCompatActivity {
     public final Handler AUTH_OK = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
-            openUi();
-            loadAccaunt();
-            openAccountTab();
+
+            loadAccaunt(new Handler(){
+                @Override
+                public void handleMessage(@NonNull Message msg) {
+                    openUi();
+                    openAccountTab();
+                }
+            });
+
         }
 
     };
@@ -40,12 +48,21 @@ public class ActMain extends AppCompatActivity {
     public final Handler AUTH_ERROR = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
-            startActivity(intent);
-            openUi();
-            loadAccaunt();
-            openAccountTab();
+            Log.i("AUTH_ERR", "ERROR");
+            Auth();
         }
     };
+
+    public void Auth(){
+            closeUi();
+            closeAll();
+            Log.i("AUTH_ERR", "START");
+            intent = new Intent(this, com.example.hydro.acts.ActUserAuth.class);
+            startActivity(intent);
+            Log.i("AUTH_ERR", "END");
+            openUi();
+
+    }
 
     RequestRetrofitMaster master = null;
     Explorer explorer = null;
@@ -135,16 +152,10 @@ public class ActMain extends AppCompatActivity {
         this.gamesBtn.setSelected(false);
     }
 
-    private void loadAccaunt() throws NullPointerException {
-        if (Explorer.memory.getUser() != null) {
-            return;
-        }
+    private void loadAccaunt(Handler handler) {
 
-        if (Explorer.memory.getAuthToken() == null) {
-            return;
-        }
+        this.master.getAuthToken(handler, AUTH_ERROR);
 
-        this.master.getMe(AUTH_OK, AUTH_ERROR, Explorer.memory.getAuthToken().getToken());
     }
 
     private void openHubsTab() {
@@ -224,12 +235,21 @@ public class ActMain extends AppCompatActivity {
 
 
     private void openAccountTab() {
-        closeAll();
-        this.accBtn.setSelected(true);
-        this.accauntUi.setVisibility(View.VISIBLE);
+        closeUi();
+        loadAccaunt(new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                openUi();
+                closeAll();
+                accBtn.setSelected(true);
+                accauntUi.setVisibility(View.VISIBLE);
 
-        accauntUi_login.setText(Explorer.memory.getUser().login);
-        accauntUi_email.setText(Explorer.memory.getUser().email);
+                accauntUi_login.setText(Explorer.memory.getUser().login);
+                accauntUi_email.setText(Explorer.memory.getUser().email);
+            }
+        });
+
+
 
     }
 
@@ -355,6 +375,7 @@ public class ActMain extends AppCompatActivity {
         //this.master.testConnection();
         master.getAuthToken(AUTH_OK, AUTH_ERROR);
 
+
         //this.HubAdapter = new CustomAdapter<Hub, HubView>(this, this.hubs_list, R.layout.hub_layout);
 
         //this.HubAdapter.add(new Hub("1"));
@@ -368,6 +389,12 @@ public class ActMain extends AppCompatActivity {
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 int id = msg.what;
+                master.login_to_hub(new Handler(){
+                    @Override
+                    public void handleMessage(@NonNull Message msg) {
+                        super.handleMessage(msg);
+                    }
+                }, new CONNBODY(id, Explorer.memory.buffer.get("hub_password"), Explorer.memory.getAuthToken().getToken()));
                 Log.i("SelectHub", Integer.toString(id));
             }
         });
