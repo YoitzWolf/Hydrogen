@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Hydrogen</string>
+    <string name="back_button_text">back</string>
+    <string name="editcode_bar_code">code</string>
+    <string name="editcode_bar_task">task</string>
+    <string name="main_accaunt">Account</string>
+    <string name="main_hubs">Hubs</string>
+    <string name="main_games">Games</string>
+    <string name="main_my_hubs">My Hubs</string>
+    <string name="hydrogen_services_url">http://192.168.1.101</string>
+    <string name="is_public_checkbox">is public</string>
+    <string name="hub_password_input">hub password</string>
+    <string name="description_input">description</string>
+    <string name="hub_name_input">hub name</string>
+    <string name="is_private_checkbox">is private</string>
+    <string name="game_word">game</string>
+    <string name="hub_info_words">Hub info:</string>
+    <string name="game_info">Game info:</string>
+    <string name="leave_hub_words">Leave Hub</string>
+
+    <string-array name="test_values">
+        <item>text 1</item>
+        <item>LoNg TexT lala</item>
+        <item>Very long text and some more text yes babe</item>
+        <item>No</item>
+    </string-array>
+
+</resources>

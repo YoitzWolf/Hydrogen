@@ -1,0 +1,32 @@
+{
+
+	"items" : ["home", "all_games", "add_games", "api"],
+
+	"home": {
+		"name": "home",
+		"href": "/",
+		"style": "button-glass h-100",
+		"active": "button-glass-act"
+	},
+
+	"add_games": {
+		"name": "add games",
+		"href": "/web/games/new",
+		"style": "button-glass h-100",
+		"active": "button-glass-act"
+	},
+
+	"all_games": {
+		"name": "all games",
+		"href": "/web/games/all",
+		"style": "button-glass h-100",
+		"active": "button-glass-act"
+	},
+
+	"api": {
+		"name": "api",
+		"href": "/",
+		"style": "button-glass h-100",
+		"active": "button-glass-act"
+	}
+}

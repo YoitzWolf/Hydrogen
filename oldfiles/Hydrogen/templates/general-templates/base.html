@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+{% block head%}
+<head>
+	
+		<title>{% if title %} {{title}} {% else %} Hydrogen {% endif %}</title>
+        <link rel="shortcut icon" href="../static/logo/light/h-logo-normal-colored_1-svg.svg" type="image/svg-icon">
+		<meta name="viewport\" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">  
+        
+        <link rel="stylesheet" href="/static/styles/colors.css">
+		<link rel="stylesheet" href="/static/styles/general.css">
+
+</head>
+{% endblock %}
+
+<body class="dark-milk">
+	{% block header %}
+    {% endblock header %}
+	   
+
+	{% block main %}
+        <main id="content" role="main">
+            {% block content %}
+            {% endblock content %}
+        </main>
+	{% endblock main %}
+
+	<footer>
+		<div class="w-90 mrg-auto" id="footer">
+			<span class='copyright'>
+				{% block footer_content %}
+		        &copy; Copyright 2020 by <a href="mailto: yoitzw">Yoitz</a>
+		        {% endblock footer_content %}
+			</span>
+		</div>
+	</footer> 
+
+
+  </body>
+</html>

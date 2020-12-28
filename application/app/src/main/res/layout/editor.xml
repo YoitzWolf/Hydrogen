@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/smoothBlack"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Toolbar
+            android:layout_width="match_parent"
+            android:background="@color/darkGray"
+
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/bar_tools_btn"
+                        style="@style/ToolbarButton"
+                        android:layout_height="match_parent"
+                        android:layout_width="50dp"
+                        android:text="T" />
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp">
+
+                        <include layout="@layout/toolbar" />
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:id="@+id/bar_tools_bar"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:background="@color/smoothBlack"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|left"
+                        android:orientation="vertical">
+
+                        <Button
+                            style="@style/ToolbarButtonUnit"
+                            android:text="unit" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+        </Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/cursor" />
+
+        <!-- block EDITTEXT -->
+        <com.example.hydro.views.EditCode
+            android:visibility="gone"
+            android:id="@+id/code_editor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:bufferType="spannable"
+            android:cursorVisible="true"
+            android:gravity="top|start"
+            android:inputType="textMultiLine|textNoSuggestions"
+
+            style="@style/Editor"
+
+            android:singleLine="false"
+            android:text=""
+            android:textColorHighlight="@color/mediumGray"
+            android:textColorHint="@color/darkGray"
+            android:textColorLink="@color/actionGreen"
+            android:textCursorDrawable="@drawable/cursor"
+            android:textIsSelectable="true"
+            android:textSize="24sp"
+            android:textStyle="bold">
+
+        </com.example.hydro.views.EditCode>
+        <!-- endblock -->
+    </LinearLayout>
+</FrameLayout>

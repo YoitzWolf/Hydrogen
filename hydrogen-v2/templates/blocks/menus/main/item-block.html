@@ -1,0 +1,7 @@
+{%- macro getitem(item) -%}
+	<li class="{{item.style}}">
+		<a href="{{ item.href }}" style="height: 100%;">
+			{{item.name}}
+		</a>
+	</li>
+{%- endmacro %}

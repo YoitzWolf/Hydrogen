@@ -1,0 +1,26 @@
+<LinearLayout android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:id="@+id/bar_acc_btn"
+        style="@style/ToolbarButton"
+        android:text="@string/main_accaunt" />
+
+    <Button
+        android:id="@+id/bar_hubs_btn"
+        style="@style/ToolbarButton"
+        android:text="@string/main_hubs" />
+
+    <Button
+        android:id="@+id/bar_my_hubs_btn"
+        style="@style/ToolbarButton"
+        android:text="@string/main_my_hubs" />
+
+    <Button
+        android:id="@+id/bar_games_btn"
+        style="@style/ToolbarButton"
+        android:text="@string/main_games" />
+
+</LinearLayout>

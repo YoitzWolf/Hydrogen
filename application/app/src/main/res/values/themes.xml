@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/darkGray</item>
+        <item name="colorPrimaryDark">@color/smoothBlack</item>
+        <item name="colorAccent">@color/smoothLight</item>
+
+        <item name="fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="Dracula" parent="AppTheme">
+        <item name="android:background">@color/smoothBlack</item>
+        <item name="android:textColor">@color/smoothLight</item>
+        <item name="fontFamily">@font/montserrat_bold</item>
+    </style>
+
+
+</resources>

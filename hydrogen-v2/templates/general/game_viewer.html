@@ -1,0 +1,23 @@
+{% extends "./general/base.html" %}
+
+
+{% block main %}
+
+<div class="w-100">
+
+	
+	
+
+		{% for game in games %}
+			<div class="w-100" style="margin-top: 1em; background: #fcfcfc; padding: 1em">
+				{% for item in game %}
+					<span class="tags">{{ item }} : {{ game[item] }}</span>
+				{% endfor %}
+			</div>
+		{% endfor %}
+
+	
+	
+
+</div>
+{% endblock %}

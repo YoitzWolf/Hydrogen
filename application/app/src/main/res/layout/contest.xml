@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout android:isScrollContainer="true"
+    style="@style/Dracula"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:id="@+id/loading"
+        style="@style/Dracula"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- BLOCK PROGRESSBAR -->
+        <include layout="@layout/progressbar" />
+        <!-- ENDBLOCK -->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/authorizedUI"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!-- BLOCK UI -->
+        <Toolbar
+            android:layout_width="match_parent"
+            android:background="@color/darkGray"
+
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp">
+
+                        <include layout="@layout/mainbar" />
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </LinearLayout>
+        </Toolbar>
+
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/AccauntUi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/user_avatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <!---<com.example.hydro.views.Drawler
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"  /> -->
+
+                    <TextView
+                        android:id="@+id/AccauntUi_login"
+                        android:layout_gravity="center_horizontal"
+                        style="@style/TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Login" />
+
+                    <TextView
+                        android:id="@+id/AccauntUi_email"
+                        style="@style/TextView"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email" />
+
+                    <Button
+                        android:id="@+id/logOut"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="log out"
+                        style="@style/Button" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+        <!-- ENDBLOCK -->
+
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/HubsUi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycle_hub_view"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </ScrollView>
+            </LinearLayout>
+        </FrameLayout>
+        <!-- ENDBLOCK -->
+
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/MyHubsUi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="end">
+
+                <LinearLayout
+                    android:gravity="end"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:gravity="center_vertical"
+                        style="@style/TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="9pt"
+                        android:text="create new Hub "/>
+                    <Button
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+
+                        android:id="@+id/new_hub"
+                        android:text=""
+
+                        android:background="@drawable/plus_button_selector"
+                        android:scaleX="3"
+                        android:scaleY="3"
+
+                        android:padding="20dp"
+
+                        />
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycle_my_hub_view"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </ScrollView>
+            </LinearLayout>
+        </FrameLayout>
+        <!-- ENDBLOCK -->
+
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/GamesUi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycle_game_view"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </ScrollView>
+            </LinearLayout>
+        </FrameLayout>
+        <!-- ENDBLOCK -->
+
+    </LinearLayout>
+
+
+    <!--
+    <Button
+        style="@style/ButtonDark"
+        android:id="@+id/tomain"
+        android:textSize="8pt"
+        android:text="To Main Page"
+        android:layout_gravity="left"
+        >
+    </Button>
+    -->
+
+</FrameLayout>

@@ -1,0 +1,85 @@
+{% import "./blocks/menus/main/item-block.html" as itemblock %}
+
+<!DOCTYPE html>
+<html lang="ru">
+	{% block head %}
+	<head runat="server">
+		<meta charset="utf-8">
+		<title>
+			{% if name %} {{ name }} {% else %} Hydrogen {% endif %}
+		</title>
+
+
+		<meta name="viewport\" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="shortcut icon" href="../static/appdata/logo/light/h-logo-normal-colored_1-svg.svg" type="image/svg-icon">
+
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&display=swap" rel="stylesheet"> 
+
+		<link rel="stylesheet" href="/static/styles/base.css?type=reload">
+	</head>
+	{% endblock %}
+
+	<body>
+		<header class="animated">
+			<div class="w-90 center">
+				{% block header %}
+				<a href="/">
+					<nav class="inline-folder logo">
+						<!--<img src="./static/appdata/logo/light/h-logo-normal_1-svg.svg" alt="logo">-->
+						{% include "./blocks/logo/light/h-logo-normal_1-svg.svg" %}
+						<h1>Hydrogen</h1>
+					</nav>
+				</a>
+
+				<nav class="inline-folder"> 
+					<ul>
+						<li style="height: 100%; width: 10px; vertical-align: middle;"></li>
+						{% block header_list %}
+
+							{% for item in bar['items'] %}
+								{{ itemblock.getitem(bar[item]) }}
+							{% endfor %}
+
+						{% endblock %}
+					</ul>
+				</nav>
+				{% endblock %}
+			</div>
+		</header>
+
+		<main>
+			{% block main %}
+			{% endblock %}
+		</main>
+
+		<footer class="w-100">
+			
+			<div class="w-90 center secondary inline-folder space-ard">
+				{% block footer %}
+				<ul>
+					{% block footer_list %}
+					<li>
+						<a href="mailto:yoitz@yandex.ru" title="send mail">
+							Yoitz Development
+						</a>
+					</li>
+
+					<li>
+						<span>
+							-
+						</span>
+					</li>
+
+					<li>
+						<a href="http://yoitz.ygg/">
+							Hydrogen Project
+						</a>
+					</li>
+					{% endblock %}
+				</ul>
+				{% endblock %}
+			</div>
+		</footer>
+	</body>
+</html>

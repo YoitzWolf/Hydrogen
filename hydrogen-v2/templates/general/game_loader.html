@@ -1,0 +1,36 @@
+{% extends "./general/base.html" %}
+
+{% block main %}
+
+<div class="w-100">
+
+	
+
+	<form class=" auto-in block w-100" method="post" enctype=multipart/form-data accept-charset="utf-8">
+
+		<input class="w-50" type="text" name="name" value="" placeholder="game name">
+
+		<input class="w-50" type="email" name="owner_email" value="" placeholder="owner_email">
+
+		<input class="w-50" type="text" name="description" value="" placeholder="description">
+		
+		<label class="w-50 fileinput">
+			<input 
+				class="w-100" 
+				type="file" 
+				id="file" 
+				name="file">
+			<span id="filenames" class="w-100 label">Choose a file</span>
+		</label>
+
+		<button class="animated auto" type="submit"> Submit </button>
+	</form>
+
+	<script src="{{url_for('static', filename='js/file_input_manager.js')}}" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript" charset="utf-8" async>
+		register_listener(document.getElementById("file"), document.getElementById("filenames"))
+	</script>
+
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{
+	"map": "aaaaabbaagbaaaaa",
+	"width": 4,
+	"height": 4,
+	"encoder": {
+		"blocks": {
+			"a": "block",
+			"b": "void",
+			"g": "palyer"
+		},
+		"colors": {
+			"block": "#111",
+			"void": "#FFF",
+			"player": "#F00"
+		}
+	},
+
+	"game_id": 0,
+	"game_name": "testview",
+	"hub_id": 0,
+	"hub_name": "testhub",
+	"users": ["test"]
+	
+}

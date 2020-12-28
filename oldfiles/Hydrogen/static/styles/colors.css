@@ -1,0 +1,55 @@
+* {
+    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .25s ease-in-out, box-shadow .25s ease-in-out !important;
+    font-family: 'Roboto Slab', Serif;
+}
+
+:root {
+    --smooth-dark: #111112;
+    --smooth-light: #f2f2f2;
+    --smooth-gray: #1E1E1E;
+    --mid-gray: #5E5E5E;
+    --light-gray: #9E9E9E;
+    --extra-light-gray: #CECECE;
+
+    --accent-ok: #b8cc52;
+    --accent-err: #f73;
+    --accent-acc: #0096cf;
+
+
+    --milky: #E6E1CF;
+    --milky-accent-err: #ffb454;
+
+    --deep-dark-blue: #14191f;
+    --deep-blue: #191f26;
+
+
+}
+
+body{
+    background-color: var(--deep-blue);
+    color: var(--smooth-light);
+}
+
+
+.svg-milk * {
+    fill: var(--milky) !important;
+}
+
+.dark-milk {
+    background-color: var(--deep-blue);
+    color: var(--milky);
+}
+
+.dark-milk svg {
+    background-color: transparent;
+    fill: var(--milky) !important;
+}
+
+
+.dark-milk > .card {
+    background-color: var(--milky);
+}
+
+.card > .header {
+    color: var(--smooth-gray);
+}
