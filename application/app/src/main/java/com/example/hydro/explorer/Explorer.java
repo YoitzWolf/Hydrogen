@@ -8,6 +8,7 @@ import com.example.hydro.explorer.models.Preferenceable;
 import com.example.hydro.request.models.Connection;
 import com.example.hydro.request.models.Game;
 import com.example.hydro.request.models.Hub;
+import com.example.hydro.request.models.Task;
 import com.example.hydro.request.models.Token;
 import com.example.hydro.request.models.TokenTypes;
 import com.example.hydro.request.models.USER;
@@ -33,6 +34,8 @@ public class Explorer {
         public List<Hub> hubs_list = new ArrayList<Hub>();
         public List<Game> games_list = new ArrayList<Game>();
         public List<Connection> conn_list = new ArrayList<Connection>();
+
+        public Task currentTask; // Game Task <Connection, Str WebView >
 
         private Memory() {
             this.AuthToken = null;

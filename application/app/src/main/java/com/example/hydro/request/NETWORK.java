@@ -8,6 +8,7 @@ import com.example.hydro.request.models.LOGINBODY;
 import com.example.hydro.request.models.REGISTERBODY;
 import com.example.hydro.request.models.SIMPLEREQUEST;
 import com.example.hydro.request.models.TOKENBODY;
+import com.example.hydro.request.models.Task;
 import com.example.hydro.request.models.USER;
 
 import java.util.ArrayList;
