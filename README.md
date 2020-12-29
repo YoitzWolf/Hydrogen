@@ -2,6 +2,10 @@
 Hydrogen App. Server&amp;Client.
 
 
+*ПРОЕКТ В РАЗРАБОТКЕ*
+*пока не выйдет "***release***" commit*
+
+
 презентация и пояснительная записка:
 ***./documents***
 
