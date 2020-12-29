@@ -6,15 +6,15 @@ Hydrogen App. Server&amp;Client.
 *пока не выйдет "***release***" commit*
 
 
-презентация и пояснительная записка:
+#презентация и пояснительная записка:
 ***./documents***
 
 
-сервер: 
-***./hydroge-v2/main.py***
+#сервер: 
+***./hydrogen-v2/main.py***
 
 
-приложение:
+#приложение:
 ***./application***
 
 
