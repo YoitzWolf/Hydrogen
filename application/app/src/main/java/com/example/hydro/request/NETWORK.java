@@ -11,6 +11,7 @@ import com.example.hydro.request.models.SIMPLEREQUEST;
 import com.example.hydro.request.models.TOKENBODY;
 import com.example.hydro.request.models.Task;
 import com.example.hydro.request.models.USER;
+import com.example.hydro.request.models.Ucode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,5 +67,13 @@ public interface NETWORK {
 
     @POST("/api/hubs/new")
     Call<SIMPLEREQUEST<TOKENBODY>> newHub(@Body HUBBODY form);
+
+    // SEND & GAME TASKS
+
+    @POST("/api/dev/send")
+    Call<SIMPLEREQUEST<TOKENBODY>> sendCode(
+            @Query("token") String token,
+            @Query("connection_id") int connection_id,
+            @Body Ucode ucode);
 
 }

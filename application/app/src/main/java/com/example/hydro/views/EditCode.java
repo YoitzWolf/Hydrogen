@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
@@ -23,7 +24,7 @@ import static java.lang.Math.min;
 public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
 
 
-    private Pattern KEYWORDS = Pattern.compile("\\b(def|self|elif|if|else|break|continue|try|catch|while|for|return|print|class|=)\\b");
+    private Pattern KEYWORDS = Pattern.compile("\\b(def|self|elif|if|else|break|continue|try|catch|while|for|return|print|class|\\=)\\b");
 
 
     //---------------------
@@ -52,6 +53,31 @@ public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
 
     private void getPxFromDp(double dp) {
         return;
+    }
+
+    public void addTextTo(String text){
+        Layout layout = this.getLayout();
+        //int line = layout.getLineForOffset(this.getSelectionStart() ); // строка с курсором
+        //float x  = layout.getPrimaryHorizontal(this.getSelectionStart() ); // координата курсора
+        //int y    = layout.getLineBaseline(line);
+
+        this.getText().insert(this.getSelectionStart(), text);
+    }
+
+    public void deleteTextFrom(String s) {
+        Layout layout = this.getLayout();
+        //int line = layout.getLineForOffset(this.getSelectionStart() ); // строка с курсором
+        //float x  = layout.getPrimaryHorizontal(this.getSelectionStart() ); // координата курсора
+        //int y    = layout.getLineBaseline(line);
+        try {
+            if (this.getText().toString().substring(
+                    this.getSelectionStart() - s.length(), this.getSelectionStart()
+            ).equals(s)) {
+                this.getText().delete(this.getSelectionStart() - s.length(), this.getSelectionStart());
+            }
+        }catch (Exception e){
+
+        }
     }
 
     private void updatePaints() {
@@ -188,7 +214,7 @@ public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
     @Override
     protected void onDraw(Canvas canvas) {
         this.updateGutter();
-        this.updateSyntaxHighlighting();
+        //this.updateSyntaxHighlighting();
         super.onDraw(canvas);
 
         int firstVisibleLine = getTopLine();
@@ -219,6 +245,4 @@ public class EditCode extends androidx.appcompat.widget.AppCompatEditText {
                 gDividerPaint
         );
     }
-
-
 }

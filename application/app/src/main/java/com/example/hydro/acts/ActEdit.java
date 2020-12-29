@@ -1,21 +1,31 @@
 package com.example.hydro.acts;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hydro.R;
 import com.example.hydro.explorer.Explorer;
 import com.example.hydro.request.RequestRetrofitMaster;
+import com.example.hydro.services.adaptor.RecButtonAdaptor;
 import com.example.hydro.views.EditCode;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.zip.Inflater;
 
 public class ActEdit extends AppCompatActivity {
 
@@ -124,6 +134,44 @@ public class ActEdit extends AppCompatActivity {
         this.taskView = this.findViewById(R.id.task_view);
 
         this.sendTab = this.findViewById(R.id.send);
+
+        this.findViewById(R.id.add_tab).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editCode.addTextTo("    ");
+                    }
+                }
+        );
+
+        this.findViewById(R.id.del_tab).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editCode.deleteTextFrom("    ");
+                    }
+                }
+        );
+
+
+
+        /*
+        RecButtonAdaptor adaptor = new RecButtonAdaptor(
+                this,
+                Arrays.asList(getResources().getStringArray(R.array.tools_bar_button_values)),
+                new Handler(){
+                    @Override
+                    public void handleMessage(@NonNull Message msg) {
+                        super.handleMessage(msg);
+                        editCode.addTextTo(getResources().getStringArray(R.array.tools_bar_button_values)[msg.what]);
+                    }
+                });
+        RecyclerView lay =  this.findViewById(R.id.bar_tools_bar_layout);
+        lay.setAdapter(adaptor);
+        adaptor.notifyDataSetChanged();
+        lay.refreshDrawableState();
+
+         */
 
     }
 

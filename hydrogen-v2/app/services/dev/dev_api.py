@@ -48,7 +48,7 @@ def save_solution():
 	query = flask.request.args
 	data = flask.request.get_json()
 
-	if data and "token" in query:
+	if data and "token" in query and "query" in query:
 		session.create_session()
 
 		lst = session.query(Token).filter(Token.token==query['token'], Token.token_type==Token.Types.Auth.name)
@@ -57,7 +57,7 @@ def save_solution():
 
 		user = lst.first()
 
-		lst = session.query(Connection).filter(Connection.id==data["connection_id"], Connection.owner_id==user.id)
+		lst = session.query(Connection).filter(Connection.id==query["connection_id"], Connection.owner_id==user.id)
 		if len(lst.all()) == 0: return (ERRTOKEN, MS.AUTH_Err)
 
 		connection = lst.first()

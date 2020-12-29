@@ -27,4 +27,25 @@
         <item>No</item>
     </string-array>
 
+
+    <array name="tools_bar_button_values">
+        <item>:</item>
+        <item>;</item>
+        <item>,</item>
+        <item>.</item>
+        <item>{ }</item>
+        <item>[ ]</item>
+        <item>( )</item>
+    </array>
+
+    <array name="tools_bar_button_names">
+        <item>:</item>
+        <item>;</item>
+        <item>,</item>
+        <item>.</item>
+        <item>{ }</item>
+        <item>[ ]</item>
+        <item>( )</item>
+    </array>
+
 </resources>
