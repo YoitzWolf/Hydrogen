@@ -10,6 +10,10 @@ Hydrogen App. Server&amp;Client.
 ***./documents***
 
 
+#XML-диаграммы, преобразованные в PDF:
+***./documents/structures***
+
+
 #сервер: 
 ***./hydrogen-v2/main.py***
 
